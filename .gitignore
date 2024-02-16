@@ -3,3 +3,8 @@
 __pycache__
 *.idea
 *.DS_Store
+.vscode
+venv
+.eggs
+emt.egg-info
+emt/version.py

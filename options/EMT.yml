@@ -72,6 +72,3 @@ val:
       type: calculate_ssim
       crop_border: 4
       test_y_channel: true
-
-
-

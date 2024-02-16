@@ -1,0 +1,10 @@
+basicsr>=1.4.2
+einops
+matplotlib
+numpy
+opencv-python
+Pillow
+timm
+torch>=1.7,<=2.1
+torchvision
+tqdm
