@@ -128,13 +128,13 @@ class IRDataset(data.Dataset):
             # Load gt and lq images.
             gt_path = self.paths[index]["gt_path"]
             img_bytes = self.file_client.get(gt_path, "gt")
-            # img_gt = imfrombytes(img_bytes, float32=True)
-            img_gt = imageio.imread(img_bytes)
+            img_gt = imfrombytes(img_bytes, float32=False)
+            # img_gt = imageio.imread(img_bytes)
 
             lq_path = self.paths[index]["lq_path"]
             img_bytes = self.file_client.get(lq_path, "lq")
-            # img_lq = imfrombytes(img_bytes, float32=True)
-            img_lq = imageio.imread(img_bytes)
+            img_lq = imfrombytes(img_bytes, float32=False)
+            # img_lq = imageio.imread(img_bytes)
 
             # augmentation for training
             if self.opt["phase"] == "train":
