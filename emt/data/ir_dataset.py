@@ -128,13 +128,13 @@ class IRDataset(data.Dataset):
             # Load gt and lq images.
             gt_path = self.paths[index]["gt_path"]
             img_bytes = self.file_client.get(gt_path, "gt")
-            img_gt = imfrombytes(img_bytes, float32=False)
-            # img_gt = imageio.imread(img_bytes)
+            # img_gt = imfrombytes(img_bytes, float32=False)
+            img_gt = np.ascontiguousarray(imageio.imread(img_bytes)[:, :, :3])
 
             lq_path = self.paths[index]["lq_path"]
             img_bytes = self.file_client.get(lq_path, "lq")
-            img_lq = imfrombytes(img_bytes, float32=False)
-            # img_lq = imageio.imread(img_bytes)
+            # img_lq = imfrombytes(img_bytes, float32=False)
+            img_lq = np.ascontiguousarray(imageio.imread(img_bytes)[:, :, :3])
 
             # augmentation for training
             if self.opt["phase"] == "train":
@@ -157,10 +157,10 @@ class IRDataset(data.Dataset):
                 ]
 
             # BGR to RGB, HWC to CHW, numpy to tensor
-            img_gt, img_lq = img2tensor(
-                [img_gt, img_lq], bgr2rgb=True, float32=True, ascontiguousarray=True
-            )
-            # img_gt, img_lq = self.np2tensor([img_gt, img_lq])
+            # img_gt, img_lq = img2tensor(
+            #     [img_gt, img_lq], bgr2rgb=True, float32=True, ascontiguousarray=True
+            # )
+            img_gt, img_lq = self.np2tensor([img_gt, img_lq])
 
         # Used in CKA and MAD to keep all inputs with the same shape
         if self.input_size is not None:
